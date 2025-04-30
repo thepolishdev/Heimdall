@@ -12,6 +12,7 @@ Heimdall is a lightweight command-line tool written in Go that enables remote sh
 - ⚙️ Customizable host and port settings
 - 💻 Interactive shell session
 - 🔄 Environment variable preservation
+- 🐚 Custom shell selection
 
 ## Installation
 
@@ -38,10 +39,16 @@ Or specify custom host and port:
 ./Heimdall --host example.com --port 8080
 ```
 
+Or specify custom shell:
+```bash
+./Heimdall --shell /bin/zsh
+```
+
 ### Command Line Options
 
 - `-H, --host`: Server host (default: "localhost")
 - `-P, --port`: Server port (default: 1234)
+- `-S, --shell`: User shell (default: "/bin/bash")
 
 ## Author
 
