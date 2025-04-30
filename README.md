@@ -1,14 +1,14 @@
 # Heimdall 🔒
 
-A simple Go-based remote shell client that allows secure connections to remote servers.
+A simple Go-based remote shell client that allows connections to remote servers.
 
 ## Description
 
-Heimdall is a lightweight command-line tool written in Go that enables secure remote shell connections. It provides a simple way to establish a shell session with a remote server.
+Heimdall is a lightweight command-line tool written in Go that enables remote shell connections. It provides a simple way to establish a shell session with a remote server.
 
 ## Features
 
-- 🔐 Secure TCP connections
+- 🔌 TCP connections
 - ⚙️ Customizable host and port settings
 - 💻 Interactive shell session
 - 🔄 Environment variable preservation
