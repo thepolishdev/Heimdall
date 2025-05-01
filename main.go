@@ -1,10 +1,10 @@
 package main
 
 import (
+	"crypto/tls"
 	"fmt"
 	"github.com/spf13/cobra"
 	"log"
-	"net"
 	"os"
 	"os/exec"
 	"os/user"
@@ -17,18 +17,25 @@ func main() {
 			host, _ := cmd.Flags().GetString("host")
 			port, _ := cmd.Flags().GetInt("port")
 			shell, _ := cmd.Flags().GetString("shell")
-			connect(host, port, shell)
+			insecure, _ := cmd.Flags().GetBool("insecure")
+			connect(host, port, shell, insecure)
 		},
 	}
 	rootCmd.Flags().StringP("host", "H", "localhost", "Server host")
 	rootCmd.Flags().IntP("port", "P", 1234, "Server port")
 	rootCmd.Flags().StringP("shell", "S", "/bin/bash", "User shell")
+	rootCmd.Flags().BoolP("insecure", "i", true, "Skip certificate verification (not recommended)")
 	rootCmd.Execute()
 }
 
-func connect(host string, port int, shell string) {
+func connect(host string, port int, shell string, insecure bool) {
 	log.Printf("Connecting to %s:%d...\n", host, port)
-	conn, err := net.Dial("tcp", fmt.Sprintf("%s:%d", host, port))
+
+	tlsConfig := &tls.Config{
+		InsecureSkipVerify: insecure,
+	}
+
+	conn, err := tls.Dial("tcp", fmt.Sprintf("%s:%d", host, port), tlsConfig)
 	defer conn.Close()
 	if err != nil {
 		log.Printf("Error connecting to server: %s\n", err)
